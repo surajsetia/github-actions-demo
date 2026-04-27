@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4   # Clone code into runner
+        uses: actions/checkout@v4  # Clone code into runner
 
       - name: Setup Docker
         uses: docker/setup-buildx-action@v4
