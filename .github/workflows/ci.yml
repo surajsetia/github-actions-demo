@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-and-push:   # Job name
-    runs-on: ubuntu-latest   # GitHub runner
+    runs-on: ubuntu-latest   # GitHub runner 
 
     steps:
       - name: Checkout code
