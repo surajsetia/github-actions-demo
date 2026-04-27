@@ -1,14 +1,28 @@
 name: CI workflow
 
-on: 
-    push:
+on:
+  push:
 
 jobs:
-    build:  # Job's name 
-        runs-on: ubuntu-latest #Github runner 
-        steps:
-        - name: Checkout code
-          uses: actions/checkout@v4  #clone the code into ubuntu runner
+  build-and-push:   # Job name
+    runs-on: ubuntu-latest   # GitHub runner
 
-        - name: Setup Docker 
-          uses: docker/setup-buildx-action@v4
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4   # Clone code into runner
+
+      - name: Setup Docker
+        uses: docker/setup-buildx-action@v4
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build and Push
+        uses: docker/build-push-action@v7
+        with:
+          context: ./backend
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/skillpulse-backend:Suraj
